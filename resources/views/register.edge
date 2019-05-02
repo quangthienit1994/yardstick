@@ -1,0 +1,32 @@
+@layout('layout.master')
+
+@section('content')
+<div id="page-register" class="page">
+    <form class="mb-2" action="{{ route("register") }}" method="POST">
+        {{csrfField()}}
+
+        <h1 class="page-title">REGISTER</h1>
+
+        <div class="form-group">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" class="form-control form-control-sm mb-2" />
+            {{ elIf('<span class="text-danger">$self</span>', getErrorFor("email"), hasErrorFor("email")) }}
+        </div>
+
+        <div class="form-group">
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" name="password" class="form-control form-control-sm mb-2" />
+            {{ elIf('<span class="text-danger">$self</span>', getErrorFor("password"), hasErrorFor("password")) }}
+        </div>
+
+        <div class="form-group">
+            <label for="password-cf">CONFIRM PASSWORD</label>
+            <input type="password" id="password-cf" name="password-cf" class="form-control form-control-sm mb-2" />
+            {{ elIf('<span class="text-danger">$self</span>', getErrorFor("password-cf"), hasErrorFor("password-cf")) }}
+        </div>
+    
+        <button type="submit" class="btn btn-primary">REGISTER</button>
+    </form>
+    <a href="{{ route("login") }}">Login</a>
+</div>
+@endsection

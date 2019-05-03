@@ -28,20 +28,19 @@ Route
 .middleware(["login"])
 .as("login");
 
-// Route.group(() => {
-// }).prefix("")
-Route
-.post("/api/v1/login", "LoginController.handleLogin")
-.validator("Login")
-.middleware(["login"])
-.as("login");
-
-
 Route.get("/register", "RegisterController.view")
 Route.post("/register", "RegisterController.register")
 .validator("Register")
 .as("register")
 
+Route.get("/logout", "LogoutController.handleLogout")
+
 Route.group(() => {
     Route.get("/dashboard", "admin/DashboardController.view")
 }).prefix("/admin")
+
+Route.group(() => {
+    Route.post("/login", "LoginController.handleLogin")
+    Route.get("/profile", "Auth/ProfileController.getProfile")
+    Route.post("/profile", "Auth/ProfileController.updateProfile")
+}).prefix("/api/v1")

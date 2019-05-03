@@ -10,10 +10,12 @@ class AccessLoginRoute {
    * @param {Function} next
    */
   async handle ({ auth, response }, next) {
-    // call next to advance the request
-    console.log("ACCESS LOGIN ROUTE POST")
-    if(await auth.check()){
+
+    try{
+      await auth.check()
       return response.send("You are logged in")
+    }catch(error){
+      // igrone
     }
 
     await next()
